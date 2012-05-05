@@ -1,0 +1,9 @@
+Installation:
+
+    git clone git://github.com/samvit/dotfiles.git ~/.dotfiles/
+
+Create symlinks:
+
+    ln -s ~/.dotfiles/emacs ~/.emacs
+    ln -s ~/.dotfiles/bashrc ~/.bashrc
+
