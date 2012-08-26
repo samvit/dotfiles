@@ -5,6 +5,7 @@
 #Create symlinks:
 
     ln -s ~/.dotfiles/emacs ~/.emacs
-    ln -s ~/.dotfiles/bashrc ~/.bashrc
+    # ln -s ~/.dotfiles/ubuntu_bashrc ~/.bashrc
+    ln -s ~/.dotfiles/osx_bashrc ~/.bashrc
     ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
 

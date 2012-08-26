@@ -1,0 +1,63 @@
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/share/npm/bin:$HOME/gsutil:$PATH"
+#PATH="/usr:/bin/:usr/local/bin:"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+
+alias ls='ls -G'
+export CLICOLOR=1
+export LSCOLORS=Gxfxcxdxbxegedabagacad
+# PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export JAVA_HOME=$(/usr/libexec/java_home)
+export NODE_PATH="/usr/local/lib/node_modules"
+export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
+
+# Aliases:
+alias vim='mvim -v'
+alias trigger="cd /usr/local/lib/forge-tools; source go.sh; cd ~/Dev;"
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+#custom Aliases
+alias '..'='cd ..'
+alias junk='cd ~/junk'
+alias dev='cd ~/dev'
+alias dropbox='cd ~/Dropbox'
+alias todo='vim ~/Dropbox/todo'
+alias lol='cd ~/dev/LOLbs/'
+alias deals='cd ~/dev/dealgrep/'
+alias hubchilla='cd ~/dev/smsgrep/'
+alias sendrail='cd ~/dev/filebook/'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias rm='trash'
+export DYLD_FALLBACK_LIBRARY_PATH="/opt/local/lib/"
+
+alias gc='git commit'
+alias gpa='git push heroku master; git push origin master'
+
+#print my dirname whenever i cd somewhere
+function cd()
+{
+  param=$* 2> /dev/null
+  if [$param -eq "" 2> ~/.error_log]; then
+    builtin cd ~/ 2> ~/.error_log && ls
+  else
+    builtin cd $param && ls
+  fi
+}
+
+#PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
+
+##
+# Your previous /Users/samvit/.bash_profile file was backed up as /Users/samvit/.bash_profile.macports-saved_2012-08-06_at_04:54:34
+##
+
+# MacPorts Installer addition on 2012-08-06_at_04:54:34: adding an appropriate PATH variable for use with MacPorts.
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+# Finished adapting your PATH environment variable for use with MacPorts.
+
