@@ -10,7 +10,7 @@ dark_green='\[\033[0;32m\]'
 red='\[\e[1;31m\]'
 lines_color=$light_green
 
-PS1=$lines_color"\n\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \""$red"[\[\033[0;31m\]\342\234\227"$pink"]"$lines_color"\342\224\200\")[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[0;31m\]\h'; else echo '\[\033[0;33m\]\u\[\033[0;37m\]'"$lines_color"'@\[\033[0;96m\]\h'; fi)"$lines_color"]\342\224\200["$pink"\w"$lines_color"] "'$fill \t \n'""$light_green"\342\224\224\342\224\200\342\224\200\342\225\274 "$command_style
+PS1=$lines_color"\n\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \""$red"[\[\033[0;31m\]\342\234\227"$pink"]"$lines_color"\342\224\200\")[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[0;31m\]\h'; else echo '\[\033[0;33m\]\u\[\033[0;37m\]'"$lines_color"'@\[\033[0;96m\]\h'; fi)"$lines_color"]\342\224\200["$pink"\w"$lines_color"] "'$fill> \t \n'""$light_green"\342\224\224\342\224\200\342\224\200\342\225\274 "$command_style
 
 # # this is invoked every time before a command is executed
 trap 'echo -ne "\033[00m"' DEBUG
@@ -19,7 +19,7 @@ function prompt_command {
   dirlength() {
     echo -n ${PWD/#$HOME/~} | wc -c
   }
-  fillsize=$((${COLUMNS}-26-$(dirlength)))
+  fillsize=$((${COLUMNS}-27-$(dirlength)))
     fill=""
     while [ $fillsize -gt "0" ]
       do
