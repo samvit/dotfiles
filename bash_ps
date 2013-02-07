@@ -7,19 +7,27 @@ command_style=$reset_style'\[\033[1;29m\]' # bold black
 light_green='\[\033[01;32m\]'
 pink='\[\033[01;31m\]'
 dark_green='\[\033[0;32m\]'
-red='\[\e[1;31m\]'
+yellow='\[\e[1;33m\]'
+purple='\e[0;35m'
 lines_color=$light_green
 
-PS1=$lines_color"\n\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \""$red"[\[\033[0;31m\]\342\234\227"$pink"]"$lines_color"\342\224\200\")[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[0;31m\]\h'; else echo '\[\033[0;33m\]\u\[\033[0;37m\]'"$lines_color"'@\[\033[0;96m\]\h'; fi)"$lines_color"]\342\224\200["$pink"\w"$lines_color"] "'$fill> \t \n'""$light_green"\342\224\224\342\224\200\342\224\200\342\225\274 "$command_style
+function git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/' | sed 's/ //g'
+}
+
+PS1=$lines_color"\n\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \""$pink"[\[\033[0;31m\]\342\234\227"$pink"]"$lines_color"\342\224\200\")[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[0;31m\]\h'; else echo '\[\033[0;33m\]\u\[\033[0;37m\]'"$lines_color"'@\[\033[0;96m\]\h'; fi)"$lines_color"]\342\224\200["$pink"\w"$lines_color"] "$purple'$(git_branch)'" "$lines_color'$fill> \t \n'""$light_green"\342\224\224\342\224\200\342\224\200\342\225\274 "$command_style
 
 # # this is invoked every time before a command is executed
 trap 'echo -ne "\033[00m"' DEBUG
 # 
 function prompt_command {
-  dirlength() {
+  pwd_dir_length() {
     echo -n ${PWD/#$HOME/~} | wc -c
   }
-  fillsize=$((${COLUMNS}-27-$(dirlength)))
+  git_branch_length() {
+    echo -n $(git_branch) | wc -c
+  }
+  fillsize=$((${COLUMNS}-28-$(pwd_dir_length)-$(git_branch_length)))
     fill=""
     while [ $fillsize -gt "0" ]
       do
