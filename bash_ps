@@ -27,7 +27,8 @@ function prompt_command {
   git_branch_length() {
     echo -n $(git_branch) | wc -c
   }
-  fillsize=$((${COLUMNS}-28-$(pwd_dir_length)-$(git_branch_length)))
+  offset=22
+  fillsize=$((${COLUMNS}-offset-$(pwd_dir_length)-$(git_branch_length)))
     fill=""
     while [ $fillsize -gt "0" ]
       do
