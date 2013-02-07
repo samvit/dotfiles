@@ -4,6 +4,7 @@
 
 #Create symlinks:
 
+    ln -s ~/.dotfiles/bash_ps ~/.bash_ps
     ln -s ~/.dotfiles/emacs ~/.emacs
     # ln -s ~/.dotfiles/ubuntu_bashrc ~/.bashrc
     ln -s ~/.dotfiles/osx_bashrc ~/.bashrc

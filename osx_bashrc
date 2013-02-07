@@ -31,7 +31,8 @@ alias junk='cd ~/junk'
 alias dev='cd ~/dev'
 alias dropbox='cd ~/Dropbox'
 alias todo='vim ~/Dropbox/todo.txt'
-alias net='cd ~/dev/grepnet/'
+alias net='cd ~/dev/greply/grepnet/'
+alias bum='cd ~/dev/mailbum/'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -40,9 +41,6 @@ alias rm='trash'
 # alias rm='mv -f \!* ~/.deleted/'
 # alias unrm='mv ~/.deleted/\!* .'
 # export DYLD_FALLBACK_LIBRARY_PATH="/opt/local/lib/"
-
-git config --global diff.tool vimdiff
-git config --global merge.tool vimdiff
 
 alias gs='git status'
 alias gpa='git push origin master; git push heroku master'
@@ -61,10 +59,21 @@ function cd () {
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
 
+function beast () {
+  git add .;
+  git commit -m "$@";
+  git pull;
+};
+
 function rage () {
   git add .;
   git commit -m "$@";
-  git push heroku master; git push origin master;
+  git pull;
+  git push production master; git push origin master;
+};
+
+function push () {
+  git push production master; git push origin master;
 };
 
 # To encrypt a file:
@@ -78,3 +87,54 @@ function encrypt () {
 function decrypt () {
   openssl des3 -d -salt -in $1 -out $2 -k $3 
 }
+function gstats {
+# awesome work from https://github.com/esc/git-stats
+# including some modifications
+  if [ -n "$(git symbolic-ref HEAD 2> /dev/null)" ]; then
+    echo "Number of commits per author:"
+    git --no-pager shortlog -sn --all
+    AUTHORS=$( git shortlog -sn --all | cut -f2 | cut -f1 -d' ')
+    LOGOPTS=""
+    if [ "$1" == '-w' ]; then
+      LOGOPTS="$LOGOPTS -w"
+      shift
+    fi
+    if [ "$1" == '-M' ]; then
+      LOGOPTS="$LOGOPTS -M"
+      shift
+    fi
+    if [ "$1" == '-C' ]; then
+      LOGOPTS="$LOGOPTS -C --find-copies-harder"
+      shift
+    fi
+    for a in $AUTHORS
+    do
+      echo '-------------------'
+      echo "Statistics for: $a"
+      echo -n "Number of files changed: "
+      git log $LOGOPTS --all --numstat --format="%n" --author=$a | cut -f3 | sort -iu | wc -l
+      echo -n "Number of lines added: "
+      git log $LOGOPTS --all --numstat --format="%n" --author=$a | cut -f1 | awk '{s+=$1} END {print s}'
+      echo -n "Number of lines deleted: "
+      git log $LOGOPTS --all --numstat --format="%n" --author=$a | cut -f2 | awk '{s+=$1} END {print s}'
+      echo -n "Number of merges: "
+      git log $LOGOPTS --all --merges --author=$a | grep -c '^commit'
+    done
+  else
+    echo "you're currently not in a git repository"
+  fi
+}
+
+function myip {
+  res=$(curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+')
+  echo "$res"
+}
+
+# set fancy prompt
+if [ -f "$HOME/.bash_ps" ]; then
+    . "$HOME/.bash_ps"
+fi
+
+      dirlength() {
+        echo -n ${PWD/#$HOME} | wc -c
+      }
