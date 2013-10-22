@@ -14,27 +14,38 @@ export NODE_PATH='/usr/local/lib/jsctags:${NODE_PATH}'
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 export PATH=/usr/local/bin:/usr/local/share/python:$PATH
 
+export PATH=/Users/samvit/dev/CS162-Stuff/nachos/bin:$PATH
+export PATH=/Users/samvit/builds/bin:$PATH
+
 
 # Aliases:
 alias vim='mvim -v'
-alias trigger="cd /usr/local/lib/forge-tools; source go.sh; cd ~/Dev;"
+export EDITOR=vim
+
 
 # some more ls aliases
 alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
+alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'''
+alias ducks='du -cks *|sort -rn|head -11'
+# spy () { lsof -i -P +c 0 +M | grep -i "$1" }
+alias json="python -mjson.tool"
+alias hs='history | grep --color=auto'
 
 #custom Aliases
 alias '..'='cd ..'
 alias '...'='cd ../..'
 alias junk='cd ~/junk'
+alias os='cd ~/dev/CS162-Stuff'
+alias db='cd ~/dev/SimpleDB'
+alias comp='cd ~/dev/CS164-Stuff/'
 alias dev='cd ~/dev'
 alias dropbox='cd ~/Dropbox'
 alias todo='vim ~/Dropbox/todo.txt'
 alias jokes='vim ~/Dropbox/Notes/Jokes.txt'
-alias net='cd ~/dev/greply/grepnet/'
-alias bum='cd ~/dev/mailbum/'
 alias box='cd ~/dev/minbox/'
+alias monk='cd ~/dev/mailmonkey'
 alias site='cd ~/dev/personal-website/'
 
 alias grep='grep --color=auto'
@@ -66,13 +77,21 @@ function gd () {
   git difftool $@;
 };
 
-function gp () {
+function gpll () {
   git pull $@;
+};
+
+function gpsh () {
+  git push $@;
 };
 
 alias eb="vim ~/.bashrc"
 alias sb="source ~/.bashrc"
 alias ev="vim ~/.vimrc"
+
+function server () {
+  python -m SimpleHTTPServer $@
+}
 
 #print my dirname whenever i cd somewhere
 function cd () { 
@@ -164,4 +183,15 @@ fi
 
 dirlength() {
   echo -n ${PWD/#$HOME} | wc -c
+}
+
+
+## Current Work-specific shortcuts
+test () {
+  ant runtest -Dtest=$1
+}
+
+
+systest () {
+  ant runsystest -Dtest=$1
 }
