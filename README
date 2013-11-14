@@ -9,4 +9,5 @@
     # ln -s ~/.dotfiles/ubuntu_bashrc ~/.bashrc
     ln -s ~/.dotfiles/osx_bashrc ~/.bashrc
     ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
+    ln -s ~/.dotfiles/ackrc ~/.ackrc
 
