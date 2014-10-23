@@ -4,6 +4,11 @@ export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/shar
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
+# pip should only run if there is a virtualenv currently activated
+# export PIP_REQUIRE_VIRTUALENV=true
+# cache pip-installed packages to avoid re-downloading
+# export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+
 alias ls='ls -G'
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
@@ -11,12 +16,11 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 export JAVA_HOME=$(/usr/libexec/java_home)
 export NODE_PATH="/usr/local/lib/node_modules"
 export NODE_PATH='/usr/local/lib/jsctags:${NODE_PATH}'
+
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 export PATH=/usr/local/bin:/usr/local/share/python:$PATH
 
-export PATH=/Users/samvit/dev/CS162-Stuff/nachos/bin:$PATH
 export PATH=/Users/samvit/builds/bin:$PATH
-export ARCHDIR=/Users/samvit/junk/mips/bin
 
 export HISTSIZE=20000
 # append all commands to the history file, don't overwrite it at the start of every new session
@@ -48,6 +52,9 @@ alias dev='cd ~/dev'
 alias dropbox='cd ~/Dropbox'
 alias todo='vim ~/Dropbox/todo.txt'
 alias jokes='vim ~/Dropbox/Notes/Jokes.txt'
+alias e='cd ~/dev/Equidate/ && source venv/bin/activate'
+alias h='cd ~/dev/harvester/'
+alias etrack='cd ~/dev/etrack/'
 alias box='cd ~/dev/minbox/'
 alias monk='cd ~/dev/mailmonkey'
 alias site='cd ~/dev/personal-website/'
@@ -59,7 +66,6 @@ alias rm='trash'
 # alias rm='mv -f \!* ~/.deleted/'
 # alias unrm='mv ~/.deleted/\!* .'
 # export DYLD_FALLBACK_LIBRARY_PATH="/opt/local/lib/"
-PATH=~/Dropbox/Minbox/git-scripts:$PATH
 alias gs='git status'
 alias gpm='git push origin master'
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -125,19 +131,24 @@ function rage () {
 
 function push () {
   git push "$@";
+}
+
+function proddb () {
+    e;
+    source venv/bin/activate;
+    heroku pg:psql HEROKU_POSTGRESQL_GOLD_URL --app equidate;
 };
+
 
 # To encrypt a file:
 # openssl des3 -salt -in file.log -out file.des3
-function encrypt () {
-  openssl des3 -salt -in $1 -out $2;
-}
-# >>> prompts for password
+alias encrypt="openssl des3 -salt"
 # To Decrypt: 
-# openssl des3 -d -salt -in file.des3 -out file.txt -k mypassword
-function decrypt () {
-  openssl des3 -d -salt -in $1 -out $2 -k $3 
-}
+
+# openssl des3 -d -salt -in file.des3 -out file.txt
+# decrypt -in file.des3 -out file.txt
+alias decrypt="openssl des3 -d -salt"
+
 function gstats {
 # awesome work from https://github.com/esc/git-stats
 # including some modifications
@@ -190,17 +201,6 @@ dirlength() {
   echo -n ${PWD/#$HOME} | wc -c
 }
 
-
-## Current Work-specific shortcuts
-test () {
-  ant runtest -Dtest=$1
-}
-
-
-systest () {
-  ant runsystest -Dtest=$1
-}
-
 extract () {
     if [ -f $1 ] ; then
       case $1 in
@@ -221,3 +221,17 @@ extract () {
          echo "'$1' is not a valid file"
      fi
 }
+
+tarball () {
+    tar -zcvf "$1.tar.gz" $1
+}
+
+runforever () {
+    while true; do
+        $@
+        echo "Process Died... RESTARTING"
+        sleep 5
+    done
+
+}
+
