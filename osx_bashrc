@@ -17,10 +17,15 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export NODE_PATH="/usr/local/lib/node_modules"
 export NODE_PATH='/usr/local/lib/jsctags:${NODE_PATH}'
 
+export DYLD_FALLBACK_LIBRARY_PATH="/usr/local/Cellar/postgresql/9.4.4/lib":$DYLD_FALLBACK_LIBRARY_PATH
+
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
-export PATH=/usr/local/bin:/usr/local/share/python:$PATH
+export PATH=/usr/local/bin:$PATH
 
 export PATH=/Users/samvit/builds/bin:$PATH
+
+export GOPATH=$HOME/dev/go
+export PATH=$HOME/dev/go/bin:$PATH
 
 export HISTSIZE=20000
 # append all commands to the history file, don't overwrite it at the start of every new session
@@ -41,19 +46,27 @@ alias ducks='du -cks *|sort -rn|head -11'
 alias json="python -mjson.tool"
 alias hs='history | grep --color=auto'
 
+# Work Aliases
+alias db='psql -d equidate-local'
+alias feed-db='psql -d equifeed-local'
+alias teal='heroku pg:psql teal --app equidate'
+
 #custom Aliases
 alias '..'='cd ..'
 alias '...'='cd ../..'
 alias junk='cd ~/junk'
 alias os='cd ~/dev/CS162-Stuff'
-alias db='cd ~/dev/SimpleDB'
 alias comp='cd ~/dev/CS164-Stuff/'
 alias dev='cd ~/dev'
-alias dropbox='cd ~/Dropbox'
+alias dbox='cd ~/Dropbox\ \(Personal\)'
+alias ebox='cd ~/Dropbox\ \(Equidate\)'
 alias todo='vim ~/Dropbox/todo.txt'
 alias jokes='vim ~/Dropbox/Notes/Jokes.txt'
-alias e='cd ~/dev/Equidate/ && source venv/bin/activate'
-alias h='cd ~/dev/harvester/'
+alias e='cd ~/dev/equidate/ && source venv/bin/activate' # Equidate
+alias f='cd ~/dev/equifeed && source venv/bin/activate' # Equifeed
+alias b='cd ~/dev/equibroker && source venv/bin/activate' # Equibroker
+alias m='cd ~/dev/equimobile/EquidateMobile/App/' # Equidate Mobile
+alias h='cd ~/dev/harvester/' # Harvester
 alias etrack='cd ~/dev/etrack/'
 alias box='cd ~/dev/minbox/'
 alias monk='cd ~/dev/mailmonkey'
@@ -65,7 +78,6 @@ alias egrep='egrep --color=auto'
 alias rm='trash'
 # alias rm='mv -f \!* ~/.deleted/'
 # alias unrm='mv ~/.deleted/\!* .'
-# export DYLD_FALLBACK_LIBRARY_PATH="/opt/local/lib/"
 alias gs='git status'
 alias gpm='git push origin master'
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -94,6 +106,10 @@ function gpll () {
 
 function gpsh () {
   git push $@;
+};
+
+function gup () {
+  git up $@;
 };
 
 alias eb="vim ~/.bashrc"
@@ -232,6 +248,13 @@ runforever () {
         echo "Process Died... RESTARTING"
         sleep 5
     done
-
 }
 
+cdf() {
+	target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
+	if [ "$target" != "" ]; then
+		cd "$target"; pwd
+	else
+		echo 'No Finder window found' >&2
+	fi
+}

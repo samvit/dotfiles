@@ -35,6 +35,9 @@ function prompt_command {
         fill="-${fill}" # fill with underscores to work on
         let fillsize=${fillsize}-1
      done
+
+    # Log to bash history log in ~/.logs
+     if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi
 }
 export PROMPT_COMMAND=prompt_command
 
