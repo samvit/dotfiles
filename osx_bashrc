@@ -50,6 +50,8 @@ alias hs='history | grep --color=auto'
 alias db='psql -d equidate-local'
 alias feed-db='psql -d equifeed-local'
 alias teal='heroku pg:psql teal --app equidate'
+alias py='ipython'
+alias eshell='foreman run python app.py shell'
 
 #custom Aliases
 alias '..'='cd ..'
@@ -83,6 +85,9 @@ alias gpm='git push origin master'
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glog='git log --pretty=format:"[%h] %ae, %ar: %s" --stat'
 alias gtree='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
+
+# glf = git log first
+alias glf='gl | head -n 25'
 
 function gc () {
   git checkout $@;
@@ -258,3 +263,12 @@ cdf() {
 		echo 'No Finder window found' >&2
 	fi
 }
+
+function portkill () { 
+    pid=$(lsof -i:$1 -t); 
+    if [ "$pid" != "" ]; then
+        # First try to kill the process gently. Then KILL it if it doesnt die
+        kill -TERM $pid || kill -KILL $pid
+    fi
+}
+
