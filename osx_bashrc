@@ -34,6 +34,7 @@ shopt -s histappend
 # Aliases:
 alias vim='mvim -v'
 export EDITOR=vim
+alias slime='subl'
 
 
 # some more ls aliases
@@ -51,7 +52,8 @@ alias db='psql -d equidate-local'
 alias feed-db='psql -d equifeed-local'
 alias teal='heroku pg:psql teal --app equidate'
 alias py='ipython'
-alias eshell='foreman run python app.py shell'
+alias eshell='sh harness.sh'
+alias runserver='foreman run python app.py runserver'
 
 #custom Aliases
 alias '..'='cd ..'
@@ -68,6 +70,7 @@ alias e='cd ~/dev/equidate/ && source venv/bin/activate' # Equidate
 alias f='cd ~/dev/equifeed && source venv/bin/activate' # Equifeed
 alias b='cd ~/dev/equibroker && source venv/bin/activate' # Equibroker
 alias m='cd ~/dev/equimobile/EquidateMobile/App/' # Equidate Mobile
+alias back='cd ~/dev/equidate-backend' # Equidate Backend
 alias h='cd ~/dev/harvester/' # Harvester
 alias etrack='cd ~/dev/etrack/'
 alias box='cd ~/dev/minbox/'
@@ -116,6 +119,26 @@ function gpsh () {
 function gup () {
   git up $@;
 };
+
+pull_request() {
+    to_branch=$1
+    if [ -z $to_branch ]; then
+        to_branch="master"
+    fi
+
+    # try the upstream branch if possible, otherwise origin will do
+    upstream=$(git config --get remote.upstream.url)
+    origin=$(git config --get remote.origin.url)
+    if [ -z $upstream ]; then
+        upstream=$origin
+    fi
+
+    to_user=$(echo $upstream | sed -e 's/.*[\/:]\([^/]*\)\/[^/]*$/\1/')
+    from_user=$(echo $origin | sed -e 's/.*[\/:]\([^/]*\)\/[^/]*$/\1/')
+    repo=$(basename `git rev-parse --show-toplevel`)
+    from_branch=$(git rev-parse --abbrev-ref HEAD)
+    open "https://github.com/$to_user/$repo/pull/new/$to_user:$to_branch...$from_user:$from_branch"
+}
 
 alias eb="vim ~/.bashrc"
 alias sb="source ~/.bashrc"
