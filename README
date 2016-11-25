@@ -3,7 +3,7 @@
 #    git clone git://github.com/samvit/dotfiles.git ~/.dotfiles/
 
 #Create symlinks:
-
+    ln -s ~/.dotfiles/bash_profile ~/.bash_profile
     ln -s ~/.dotfiles/bash_ps ~/.bash_ps
     ln -s ~/.dotfiles/emacs ~/.emacs
     # ln -s ~/.dotfiles/ubuntu_bashrc ~/.bashrc
