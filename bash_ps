@@ -22,12 +22,12 @@ trap 'echo -ne "\033[00m"' DEBUG
 # 
 function prompt_command {
   pwd_dir_length() {
-    echo -n ${PWD/#$HOME/~} | wc -c
+    echo -n ${PWD/~} | wc -c
   }
   git_branch_length() {
     echo -n $(git_branch) | wc -c
   }
-  offset=22
+  offset=35
   fillsize=$((${COLUMNS}-offset-$(pwd_dir_length)-$(git_branch_length)))
     fill=""
     while [ $fillsize -gt "0" ]
