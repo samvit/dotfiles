@@ -31,7 +31,7 @@ export HISTSIZE=20000
 # append all commands to the history file, don't overwrite it at the start of every new session
 shopt -s histappend
 
-# Aliases:
+# Editor Aliases:
 alias vim='mvim -v'
 export EDITOR=vim
 alias slime='subl'
@@ -148,7 +148,7 @@ function server () {
   python -m SimpleHTTPServer $@
 }
 
-#print my dirname whenever i cd somewhere
+# Run ls whenever I cd somewhere
 function cd () { 
   builtin cd "$@" && ls;
 }
