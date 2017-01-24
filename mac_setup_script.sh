@@ -14,6 +14,7 @@ brew cask install bartender
 brew cask install caffeine
 brew cask install cyberduck
 brew cask install daisydisk
+brew cask install screenhero
 brew cask install dash
 brew cask install discord
 brew cask install divvy
@@ -44,13 +45,16 @@ brew cask install sublime-text
 brew cask install the-unarchiver
 brew cask install tunnelbear
 brew cask install utorrent
-brew cask install vlc
+brew cask install tripmode
 brew cask install intellij-idea
+brew cask install vlc
+brew cask install whatsapp
 
 # brew utilities
 brew install ack
 brew install axel
 brew install bison
+brew install caddy # webserver
 brew install cloc
 brew install cmake
 brew install ctags
@@ -64,7 +68,7 @@ brew install httpie
 brew install jq
 brew install leiningen
 brew install macvim
-brew install mono
+brew install mono # needed for c# support by youcompleteme (vim)
 brew install mysql
 brew install ngrok
 brew install nmap
@@ -83,6 +87,7 @@ brew install tmux
 brew install trash
 brew install vifm
 brew install wget
+brew install yarn
 
 # Taps
 brew tap laurent22/massren && brew install massren
@@ -93,3 +98,7 @@ npm install -g typescript
 
 # Gem
 gem install foreman
+
+# Pip (pip is installed with brew python)
+pip install ipython
+pip install git-up

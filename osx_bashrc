@@ -66,13 +66,16 @@ alias dbox='cd ~/Dropbox\ \(Personal\)'
 alias ebox='cd ~/Dropbox\ \(Equidate\)'
 alias todo='vim ~/Dropbox/notes/todo.txt'
 alias jokes='vim ~/Dropbox/Notes/Jokes.txt'
-alias e='cd ~/dev/equidate/ && source venv/bin/activate' # Equidate
-alias f='cd ~/dev/equifeed && source venv/bin/activate' # Equifeed
-alias b='cd ~/dev/equibroker && source venv/bin/activate' # Equibroker
-alias m='cd ~/dev/equimobile/EquidateMobile/App/' # Equidate Mobile
-alias back='cd ~/dev/backend' # Equidate Backend
+
+alias e='cd ~/dev/equi/' # Equi
+alias eq='cd ~/dev/equi/equidate/ && source venv/bin/activate' # Equidate
+alias f='cd ~/dev/equi/equifeed && source venv/bin/activate' # Equifeed
+alias b='cd ~/dev/equi/equibroker && source venv/bin/activate' # Equibroker
+alias m='cd ~/dev/equi/equimobile/EquidateMobile/App/' # Equidate Mobile
+alias back='cd ~/dev/equi/backend' # Equidate Backend
+alias cl='cd ~/dev/equi/closings' # Equidate Closings
+
 alias h='cd ~/dev/harvester/' # Harvester
-alias etrack='cd ~/dev/etrack/'
 alias box='cd ~/dev/minbox/'
 alias monk='cd ~/dev/mailmonkey'
 alias site='cd ~/dev/personal-website/'
@@ -88,6 +91,8 @@ alias gpm='git push origin master'
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glog='git log --pretty=format:"[%h] %ae, %ar: %s" --stat'
 alias gtree='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
+
+alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport '
 
 # glf = git log first
 alias glf='gl | head -n 25'
