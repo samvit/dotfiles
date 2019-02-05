@@ -19,7 +19,7 @@ export NODE_PATH='/usr/local/lib/jsctags:${NODE_PATH}'
 
 export DYLD_FALLBACK_LIBRARY_PATH="/usr/local/Cellar/postgresql/9.4.4/lib":$DYLD_FALLBACK_LIBRARY_PATH
 
-export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
+# export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 export PATH=/usr/local/bin:$PATH
 
 export PATH=/Users/samvit/builds/bin:$PATH
@@ -50,10 +50,10 @@ alias hs='history | grep --color=auto'
 # Work Aliases
 alias db='psql -d equidate-local'
 alias feed-db='psql -d equifeed-local'
-alias teal='heroku pg:psql teal --app equidate'
 alias py='ipython'
 alias eshell='sh harness.sh'
-alias runserver='foreman run python app.py runserver'
+alias h='heroku'
+alias proddb='heroku pg:psql cyan --app equidate'
 
 #custom Aliases
 alias '..'='cd ..'
@@ -67,18 +67,18 @@ alias ebox='cd ~/Dropbox\ \(Equidate\)'
 alias todo='vim ~/Dropbox/notes/todo.txt'
 alias jokes='vim ~/Dropbox/Notes/Jokes.txt'
 
-alias e='cd ~/dev/equi/' # Equi
-alias eq='cd ~/dev/equi/equidate/ && source venv/bin/activate' # Equidate
-alias f='cd ~/dev/equi/equifeed && source venv/bin/activate' # Equifeed
-alias b='cd ~/dev/equi/equibroker && source venv/bin/activate' # Equibroker
-alias m='cd ~/dev/equi/equimobile/EquidateMobile/App/' # Equidate Mobile
-alias back='cd ~/dev/equi/backend' # Equidate Backend
-alias cl='cd ~/dev/equi/closings' # Equidate Closings
+alias e='cd ~/dev/equi/'
+alias eq='cd ~/dev/equi/equidate/ && pipenv shell'
+alias f='cd ~/dev/equi/platform/'
+alias ea='cd ~/dev/equi/admin/'
+alias feed='cd ~/dev/equi/equifeed && source venv/bin/activate'
+alias b='cd ~/dev/equi/backend'
+alias cl='cd ~/dev/equi/closings'
 
-alias h='cd ~/dev/harvester/' # Harvester
 alias box='cd ~/dev/minbox/'
 alias monk='cd ~/dev/mailmonkey'
 alias site='cd ~/dev/personal-website/'
+alias ss='cd ~/dev/s2/s2capital-scripts && source venv/bin/activate'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -95,7 +95,7 @@ alias gtree='git log --graph --full-history --all --color --pretty=format:"%x1b[
 alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport '
 
 # glf = git log first
-alias glf='gl | head -n 25'
+alias glf='gl | head -n 15'
 
 function gc () {
   git checkout $@;
@@ -107,6 +107,10 @@ function gcm () {
 
 function gb () {
   git branch $@;
+};
+
+function gbd () {
+  git branch -D $@;
 };
 
 function gd () {
@@ -148,6 +152,7 @@ pull_request() {
 alias eb="vim ~/.bashrc"
 alias sb="source ~/.bashrc"
 alias ev="vim ~/.vimrc"
+alias es="vim ~/.dotfiles/mac_setup_script.sh"
 
 function server () {
   python -m SimpleHTTPServer $@
@@ -181,14 +186,6 @@ function rage () {
 function push () {
   git push "$@";
 }
-
-function proddb () {
-    e;
-    source venv/bin/activate;
-    heroku pg:psql HEROKU_POSTGRESQL_GOLD_URL --app equidate;
-};
-
-
 # To encrypt a file:
 # openssl des3 -salt -in file.log -out file.des3
 alias encrypt="openssl des3 -salt"
@@ -300,3 +297,6 @@ function portkill () {
     fi
 }
 
+#function pods () {
+  # kubectl get pods --namespace @(a[2] if len(a) > 2 else "default") -l @("app=" + a[0] + ",release=" + a[1]) -o jsonpath="{.items[0].metadata.name}"
+#}
