@@ -1,13 +1,6 @@
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/share/npm/bin:$HOME/gsutil:$PATH"
-#PATH="/usr:/bin/:usr/local/bin:"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
-# pip should only run if there is a virtualenv currently activated
-# export PIP_REQUIRE_VIRTUALENV=true
-# cache pip-installed packages to avoid re-downloading
-# export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 alias ls='ls -G'
 export CLICOLOR=1
@@ -19,8 +12,10 @@ export NODE_PATH='/usr/local/lib/jsctags:${NODE_PATH}'
 
 export DYLD_FALLBACK_LIBRARY_PATH="/usr/local/Cellar/postgresql/9.4.4/lib":$DYLD_FALLBACK_LIBRARY_PATH
 
-# export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
-export PATH=/usr/local/bin:$PATH
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
 
 export PATH=/Users/samvit/builds/bin:$PATH
 
@@ -63,18 +58,14 @@ alias os='cd ~/dev/CS162-Stuff'
 alias comp='cd ~/dev/CS164-Stuff/'
 alias dev='cd ~/dev'
 alias dbox='cd ~/Dropbox\ \(Personal\)'
-alias ebox='cd ~/Dropbox\ \(Equidate\)'
 alias todo='vim ~/Dropbox/notes/todo.txt'
 alias jokes='vim ~/Dropbox/Notes/Jokes.txt'
 
 alias e='cd ~/dev/equi/'
 alias eq='cd ~/dev/equi/equidate/ && pipenv shell'
-alias f='cd ~/dev/equi/platform/'
-alias ea='cd ~/dev/equi/admin/'
 alias feed='cd ~/dev/equi/equifeed && source venv/bin/activate'
-alias b='cd ~/dev/equi/backend'
-alias cl='cd ~/dev/equi/closings'
 
+alias f='cd ~/dev/fabric/'
 alias box='cd ~/dev/minbox/'
 alias monk='cd ~/dev/mailmonkey'
 alias site='cd ~/dev/personal-website/'
@@ -270,6 +261,10 @@ extract () {
 
 tarball () {
     tar -zcvf "$1.tar.gz" $1
+}
+
+mov_to_mp4 () {
+  ffmpeg -i $1.mov -qscale 0 $1.mp4 
 }
 
 runforever () {
