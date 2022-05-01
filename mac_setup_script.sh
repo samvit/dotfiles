@@ -16,6 +16,7 @@ brew install --cask authy
 brew install --cask bartender
 brew install --cask balsamiq-mockups
 brew install --cask brave-browser
+#Install amphetamine
 
 #brew install --cask contexts
 brew install --cask cyberduck
