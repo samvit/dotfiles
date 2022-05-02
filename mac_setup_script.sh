@@ -28,7 +28,7 @@ brew install --cask divvy
 brew install --cask dropbox
 brew install --cask encryptme
 brew install --cask evernote
-brew install --cask flux
+#brew install --cask flux # Trying out native NightShift as it could be better
 brew install --cask firefox
 brew install --cask google-chrome
 brew install --cask google-cloud-sdk
