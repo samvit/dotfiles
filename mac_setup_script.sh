@@ -12,11 +12,12 @@ brew tap caskroom/cask
 # cask utilities
 brew install --cask 1password
 brew install --cask alfred
+#Install amphetamine.
 brew install --cask authy
 brew install --cask bartender
 brew install --cask balsamiq-mockups
 brew install --cask brave-browser
-#Install amphetamine
+brew install --cask bettertouchtool
 
 #brew install --cask contexts
 brew install --cask cyberduck
@@ -28,6 +29,7 @@ brew install --cask divvy
 brew install --cask dropbox
 brew install --cask encryptme
 brew install --cask evernote
+brew install --cask figma
 #brew install --cask flux # Trying out native NightShift as it could be better
 brew install --cask firefox
 brew install --cask google-chrome
@@ -75,6 +77,7 @@ brew install ctags
 brew install docker
 brew install erlang
 brew install flow
+brew install fzf
 brew install gimp
 brew install git
 brew install go
